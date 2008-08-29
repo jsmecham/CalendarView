@@ -1,17 +1,18 @@
 //
-// Prototype-Enabled JavaScript Calendar
+// CalendarView (for Prototype)
 //
-// Copyright 2007 Singlesnet, Inc.
+// Copyright 2007-2008 Singlesnet, Inc.
 // Copyright 2002-2005 Mihai Bazon
 //
 // Maintained by Justin Mecham <justin@corp.singlesnet.com>
 //
 // This calendar is based very loosely on the Dynarch Calendar in that it was
-// used as a base, but completely gutted and more or less rewritten in place to
-// use the Prototype (and Scriptaculous) JavaScript libraries.
+// used as a base, but completely gutted and more or less rewritten in place
+// to use the Prototype JavaScript library.
 //
-// As such, this calendar is under the terms of the GNU Lesser General Public
-// License.  More information on the Dynarch Calendar can be found at:
+// As such, CalendarView is licensed under the terms of the GNU Lesser General
+// Public License (LGPL). More information on the Dynarch Calendar can be
+// found at:
 //
 //   www.dynarch.com/projects/calendar
 //
@@ -22,7 +23,7 @@ var Calendar = Class.create()
 // Constants
 //------------------------------------------------------------------------------
 
-Calendar.VERSION = '1.0'
+Calendar.VERSION = '1.1-dev'
 
 Calendar.DAY_NAMES = new Array(
   'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
@@ -344,34 +345,34 @@ Calendar.prototype = {
             // Reset classes on the cell
             cell.className = ''
             cell.date = new Date(date)
-            Element.update(cell, day)
+            cell.update(day)
 
             // Account for days of the month other than the current month
             if (!isCurrentMonth)
-              Element.addClassName(cell, 'otherDay')
+              cell.addClassName('otherDay')
             else
               rowHasDays = true
 
             // Ensure the current day is selected
             if (isCurrentMonth && day == dayOfMonth) {
-              Element.addClassName(cell, 'selected')
+              cell.addClassName('selected')
               calendar.currentDateElement = cell
             }
 
             // Today
             if (date.getFullYear() == thisYear && date.getMonth() == thisMonth && day == thisDay)
-              Element.addClassName(cell, 'today')
+              cell.addClassName('today')
 
             // Weekend
             if ([0, 6].indexOf(dayOfWeek) != -1)
-              Element.addClassName(cell, 'weekend')
+              cell.addClassName('weekend')
 
             // Set the date to tommorrow
             date.setDate(day + 1)
           }
         )
         // Hide the extra row if it contains only days from another month
-        !rowHasDays ? Element.hide(row) : Element.show(row)
+        !rowHasDays ? row.hide() : row.show()
       }
     )
 
@@ -398,18 +399,20 @@ Calendar.prototype = {
     }
 
     // Calendar Table
-    var table = Builder.node('table')
+    var table = new Element('table')
 
     // Calendar Header
-    var thead = Builder.node('thead')
+    var thead = new Element('thead')
     table.appendChild(thead)
 
     // Title Placeholder
-    var row = Builder.node('tr', [ Builder.node('td', { colSpan: 7, className: 'title' })])
+    var row  = new Element('tr')
+    var cell = new Element('td', { colSpan: 7, className: 'title' })
+    row.appendChild(cell)
     thead.appendChild(row)
 
     // Calendar Navigation
-    row = Builder.node('tr')
+    row = new Element('tr')
     this._drawButtonCell(row, '&#x00ab;', 1, Calendar.NAV_PREVIOUS_YEAR)
     this._drawButtonCell(row, '&#x2039;', 1, Calendar.NAV_PREVIOUS_MONTH)
     this._drawButtonCell(row, 'Today',    3, Calendar.NAV_TODAY)
@@ -418,30 +421,30 @@ Calendar.prototype = {
     thead.appendChild(row)
 
     // Day Names
-    row = Builder.node('tr')
+    row = new Element('tr')
     for (var i = 0; i < 7; ++i) {
-      cell = Builder.node('th', Calendar.SHORT_DAY_NAMES[i])
+      cell = new Element('th').update(Calendar.SHORT_DAY_NAMES[i])
       if (i == 0 || i == 6)
-        Element.addClassName(cell, 'weekend')
+        cell.addClassName('weekend')
       row.appendChild(cell)
     }
     thead.appendChild(row)
 
     // Calendar Days
-    var tbody = table.appendChild(Builder.node('tbody'))
+    var tbody = table.appendChild(new Element('tbody'))
     for (i = 6; i > 0; --i) {
-      row = tbody.appendChild(Builder.node('tr', { className: 'days' }))
+      row = tbody.appendChild(new Element('tr', { className: 'days' }))
       for (var j = 7; j > 0; --j) {
-        cell = row.appendChild(Builder.node('td'))
+        cell = row.appendChild(new Element('td'))
         cell.calendar = this
       }
     }
 
     // Calendar Container (div)
-    this.container = Builder.node('div', { className: 'calendar' })
+    this.container = new Element('div', { className: 'calendar' })
     if (this.isPopup) {
-      Element.setStyle(this.container, { position: 'absolute', display: 'none' })
-      Element.addClassName(this.container, 'popup')
+      this.container.setStyle({ position: 'absolute', display: 'none' })
+      this.container.addClassName('popup')
     }
     this.container.appendChild(table)
 
@@ -458,7 +461,7 @@ Calendar.prototype = {
 
   _drawButtonCell: function(parent, text, colSpan, navAction)
   {
-    var cell          = Builder.node('td')
+    var cell          = new Element('td')
     if (colSpan > 1) cell.colSpan = colSpan
     cell.className    = 'button'
     cell.calendar     = this
@@ -498,7 +501,7 @@ Calendar.prototype = {
   // Shows the Calendar
   show: function()
   {
-    Element.show(this.container)
+    this.container.show()
     if (this.isPopup) {
       window._popupCalendar = this
       Event.observe(document, 'mousedown', Calendar._checkCalendar)
@@ -508,7 +511,7 @@ Calendar.prototype = {
   // Shows the calendar at the given absolute position
   showAt: function (x, y)
   {
-    Element.setStyle(this.container, { left: x + 'px', top: y + 'px' })
+    this.container.setStyle({ left: x + 'px', top: y + 'px' })
     this.show()
   },
 
@@ -524,7 +527,7 @@ Calendar.prototype = {
   {
     if (this.isPopup)
       Event.stopObserving(document, 'mousedown', Calendar._checkCalendar)
-    Element.hide(this.container)
+    this.container.hide()
   },
 
 
