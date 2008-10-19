@@ -1,4 +1,9 @@
 
+Version 1.2 - Not Yet Released
+
+ - Fixed the display of days from other months in the default CSS. Thanks to
+   Corie Slate for reporting this issue.
+
 Version 1.1 - October 19th, 2008
 
  - Upgraded to Prototype 1.6 and cleaned up code to take full advantage of its

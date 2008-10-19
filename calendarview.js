@@ -23,7 +23,7 @@ var Calendar = Class.create()
 // Constants
 //------------------------------------------------------------------------------
 
-Calendar.VERSION = '1.2-dev'
+Calendar.VERSION = '1.1-dev'
 
 Calendar.DAY_NAMES = new Array(
   'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
