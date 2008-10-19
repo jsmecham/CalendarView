@@ -1,11 +1,15 @@
 
-Version 1.1 - Not Yet Released
+Version 1.1 - October 19th, 2008
 
  - Upgraded to Prototype 1.6 and cleaned up code to take full advantage of its
    new API features.
 
- - Removed our dependency on Builder from Scriptaculous, as Prototype 1.6 has
-   its own DOM Builder now.
+ - Removed our dependency on Builder from script.aculo.us, as Prototype 1.6
+   has its own DOM Builder now.
+
+ - Fixed a bug where navigating through months of the calendar would display
+   the wrong year when you reached December. Thanks to Dirk Koritnik for the
+   fix and for everyone who reported the issue.
 
 Version 1.0 - March 12th, 2007
 

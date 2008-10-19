@@ -377,7 +377,7 @@ Calendar.prototype = {
     )
 
     this.container.getElementsBySelector('td.title')[0].update(
-      Calendar.MONTH_NAMES[month] + ' ' + date.getFullYear()
+      Calendar.MONTH_NAMES[month] + ' ' + this.date.getFullYear()
     )
   },
 
