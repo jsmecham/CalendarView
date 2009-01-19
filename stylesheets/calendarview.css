@@ -63,20 +63,20 @@ div.calendar td.button:active
   background-color: #cde;
 }
 
-div.calendar td.selected
+div.calendar tr.days td.selected
 {
   font-weight: bold;
   background-color: #fff;
   color: #000;
 }
 
-div.calendar td.today
+div.calendar tr.days td.today
 {
   font-weight: bold;
   color: #D50000;
 }
 
-div.calendar td.otherDay
+div.calendar tr.days td.otherDay
 {
   color: #bbb;
 }

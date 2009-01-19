@@ -1,6 +1,9 @@
 
 Version 1.2
 
+ - Fixed some CSS rules in the packaged stylesheet so that days from other
+   months and the current date are styled the way they were intended.
+
  - Reorganized the repository a bit and added an example to the downloadable
    package.
 
