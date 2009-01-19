@@ -1,5 +1,10 @@
 
-Version 1.2 - Not Yet Released
+Version 1.2
+
+ - Reorganized the repository a bit and added an example to the downloadable
+   package.
+
+ - Added some release packaging scripts to ease distribution of new releases.
 
  - Fixed the display of days from other months in the default CSS. Thanks to
    Corie Slate for reporting this issue.

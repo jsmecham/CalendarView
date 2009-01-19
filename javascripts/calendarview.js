@@ -1,10 +1,10 @@
 //
 // CalendarView (for Prototype)
+// calendarview.org
 //
-// Copyright 2007-2008 Singlesnet, Inc.
-// Copyright 2002-2005 Mihai Bazon
+// Maintained by Justin Mecham <justin@aspect.net>
 //
-// Maintained by Justin Mecham <justin@corp.singlesnet.com>
+// Portions Copyright 2002-2005 Mihai Bazon
 //
 // This calendar is based very loosely on the Dynarch Calendar in that it was
 // used as a base, but completely gutted and more or less rewritten in place
@@ -23,7 +23,7 @@ var Calendar = Class.create()
 // Constants
 //------------------------------------------------------------------------------
 
-Calendar.VERSION = '1.1-dev'
+Calendar.VERSION = '1.2-dev'
 
 Calendar.DAY_NAMES = new Array(
   'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
