@@ -407,7 +407,8 @@ Calendar.prototype = {
 
     // Title Placeholder
     var row  = new Element('tr')
-    var cell = new Element('td', { colSpan: 7, className: 'title' })
+    var cell = new Element('td', { colSpan: 7 } )
+    cell.addClassName('title')
     row.appendChild(cell)
     thead.appendChild(row)
 
@@ -433,7 +434,8 @@ Calendar.prototype = {
     // Calendar Days
     var tbody = table.appendChild(new Element('tbody'))
     for (i = 6; i > 0; --i) {
-      row = tbody.appendChild(new Element('tr', { className: 'days' }))
+      row = tbody.appendChild(new Element('tr'))
+      row.addClassName('days')
       for (var j = 7; j > 0; --j) {
         cell = row.appendChild(new Element('td'))
         cell.calendar = this
@@ -441,7 +443,8 @@ Calendar.prototype = {
     }
 
     // Calendar Container (div)
-    this.container = new Element('div', { className: 'calendar' })
+    this.container = new Element('div')
+    this.container.addClassName('calendar')
     if (this.isPopup) {
       this.container.setStyle({ position: 'absolute', display: 'none' })
       this.container.addClassName('popup')
