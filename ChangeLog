@@ -1,5 +1,5 @@
 
-Version 1.2
+Version 1.2 - May 13th, 2009
 
  - Fixed some CSS rules in the packaged stylesheet so that days from other
    months and the current date are styled the way they were intended.
@@ -11,6 +11,9 @@ Version 1.2
 
  - Fixed the display of days from other months in the default CSS. Thanks to
    Corie Slate for reporting this issue.
+
+ - Fixed a compatibility issue with Internet Explorer 8. Thanks to Gabriel
+   Engel for this fix.
 
 Version 1.1 - October 19th, 2008
 

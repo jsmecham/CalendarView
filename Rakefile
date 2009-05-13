@@ -1,7 +1,7 @@
 require 'rake'
 require 'rake/packagetask'
 
-CALENDARVIEW_VERSION  = '1.2-dev'
+CALENDARVIEW_VERSION  = '1.2'
 
 task :default => [ :package ]
 
