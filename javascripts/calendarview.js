@@ -242,8 +242,10 @@ Calendar.setup = function(params)
   else
   {
     var triggerElement = $(params.triggerElement || params.dateField)
+    // create the calendar before the onclick so we're not creating new DOM elements
+    // every time we trigger.
+    var calendar = new Calendar()
     triggerElement.onclick = function() {
-      var calendar = new Calendar()
       calendar.setSelectHandler(params.selectHandler || Calendar.defaultSelectHandler)
       calendar.setCloseHandler(params.closeHandler || Calendar.defaultCloseHandler)
       if (params.dateFormat)
