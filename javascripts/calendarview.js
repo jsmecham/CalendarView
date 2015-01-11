@@ -218,11 +218,12 @@ Calendar.setup = function(params)
   param_default('parentElement', null)
   param_default('selectHandler',  null)
   param_default('closeHandler', null)
+  param_default('firstDayOfTheWeek', 0)
 
   // In-Page Calendar
   if (params.parentElement)
   {
-    var calendar = new Calendar(params.parentElement)
+    var calendar = new Calendar(params.parentElement, params)
     calendar.setSelectHandler(params.selectHandler || Calendar.defaultSelectHandler)
     if (params.dateFormat)
       calendar.setDateFormat(params.dateFormat)
@@ -243,7 +244,7 @@ Calendar.setup = function(params)
   {
     var triggerElement = $(params.triggerElement || params.dateField)
     triggerElement.onclick = function() {
-      var calendar = new Calendar()
+      var calendar = new Calendar(null, params)
       calendar.setSelectHandler(params.selectHandler || Calendar.defaultSelectHandler)
       calendar.setCloseHandler(params.closeHandler || Calendar.defaultCloseHandler)
       if (params.dateFormat)
@@ -280,6 +281,7 @@ Calendar.prototype = {
   minYear: 1900,
   maxYear: 2100,
   dateFormat: '%Y-%m-%d',
+  firstDayOfTheWeek: 0,
 
   // Dates
   date: new Date(),
@@ -296,12 +298,12 @@ Calendar.prototype = {
   // Initialize
   //----------------------------------------------------------------------------
 
-  initialize: function(parent)
+  initialize: function(parent, options)
   {
     if (parent)
-      this.create($(parent))
+      this.create($(parent), options)
     else
-      this.create()
+      this.create(null, options)
   },
 
 
@@ -330,7 +332,7 @@ Calendar.prototype = {
 
     // Calculate the first day to display (including the previous month)
     date.setDate(1)
-    date.setDate(-(date.getDay()) + 1)
+    date.setDate( -(date.getDay() - 1) - ((7 - this.firstDayOfTheWeek) % 7) )
 
     // Fill in the days of the month
     Element.getElementsBySelector(this.container, 'tbody tr').each(
@@ -387,7 +389,7 @@ Calendar.prototype = {
   // Create/Draw the Calendar HTML Elements
   //----------------------------------------------------------------------------
 
-  create: function(parent)
+  create: function(parent, options)
   {
 
     // If no parent was specified, assume that we are creating a popup calendar.
@@ -397,6 +399,7 @@ Calendar.prototype = {
     } else {
       this.isPopup = false
     }
+    if (options.firstDayOfTheWeek) this.firstDayOfTheWeek = options.firstDayOfTheWeek;
 
     // Calendar Table
     var table = new Element('table')
@@ -424,7 +427,7 @@ Calendar.prototype = {
     // Day Names
     row = new Element('tr')
     for (var i = 0; i < 7; ++i) {
-      cell = new Element('th').update(Calendar.SHORT_DAY_NAMES[i])
+      cell = new Element('th').update(Calendar.SHORT_DAY_NAMES[(i + this.firstDayOfTheWeek) % 7])
       if (i == 0 || i == 6)
         cell.addClassName('weekend')
       row.appendChild(cell)
