@@ -1,40 +1,42 @@
 
-div.calendar
-{
-  font-size: smaller;
-  color: #000;
-}
-
-div.calendar.popup
+.CalendarView.popup
 {
   margin-left: -40px;
   margin-top: -100px;
 }
 
-div.calendar table
+.CalendarView
+{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+.CalendarView table
 {
   background-color: #eee;
   border: 1px solid #aaa;
   border-collapse: collapse;
 }
 
-div.calendar thead {
+.CalendarView thead
+{
   background-color: white;
 }
 
-div.calendar td,
-div.calendar th
+.CalendarView td,
+.CalendarView th
 {
-  padding: 3px;
+  padding: 8px;
   text-align: center;
 }
 
-div.calendar td.title
+.CalendarView td.title
 {
+  text-align: center;
   font-weight: bold;
 }
 
-div.calendar th
+.CalendarView th
 {
   background: #ddd;
   border-bottom: 1px solid #ccc;
@@ -43,40 +45,40 @@ div.calendar th
   color: #555;
 }
 
-div.calendar tr.days td {
-  width: 2em;
+.CalendarView td
+{
   color: #555;
   text-align: center;
   cursor: pointer;
 }
 
-div.calendar tr.days td:hover,
-div.calendar td.button:hover
+.CalendarView tbody td:hover,
+.CalendarView tr.navigation th:hover
 {
   background-color: #34ABFA;
   cursor: pointer;
 }
 
-div.calendar tr.days td:active
-div.calendar td.button:active
+.CalendarView tbody td:active,
+.CalendarView tr.navigation th:active
 {
   background-color: #cde;
 }
 
-div.calendar tr.days td.selected
+.CalendarView td.selected
 {
   font-weight: bold;
   background-color: #fff;
   color: #000;
 }
 
-div.calendar tr.days td.today
+.CalendarView td.today
 {
   font-weight: bold;
   color: #D50000;
 }
 
-div.calendar tr.days td.otherDay
+.CalendarView td.otherDay
 {
   color: #bbb;
 }
